@@ -50,8 +50,8 @@ private:
 
 	// muuttujat 
 
-	float				playerSpeed = 5.0f;
-	float				timer;
+	float	playerSpeed = 4.0f;
+	float	timer;
 
 	sf::Clock animationClock;
 	sf::Time animationInterval = sf::seconds(0.5f); // Change every 0.5 seconds
@@ -69,6 +69,26 @@ private:
 	std::vector<sf::Sprite>		walls;
 	sf::Sprite					wall;
 
+	sf::Texture					waterTex;
+	std::vector<sf::Sprite>		waters;
+	sf::Sprite					water;
+
+	sf::Texture					binATex;
+	std::vector<sf::Sprite>		binA;
+	sf::Sprite					biA;
+
+	sf::Texture					binBTex;
+	std::vector<sf::Sprite>		binB;
+	sf::Sprite					biB;
+
+	sf::Texture					makerATex;
+	std::vector<sf::Sprite>		makerA;
+	sf::Sprite					makA;
+
+	sf::Texture					makerBTex;
+	std::vector<sf::Sprite>		makerB;
+	sf::Sprite					makB;
+
 	sf::Texture					catTex1, catTex2;
 	std::vector<sf::Sprite> 	kitty;
 	sf::Sprite 					cat;
@@ -84,6 +104,8 @@ private:
 	sf::Texture* 				currentPlayerATex;
 	sf::Texture* 				currentPlayerBTex;
 	sf::Texture*				currentCatTex;
+
+// all init functions
 
 	void	initVar();
 	void	initWin();

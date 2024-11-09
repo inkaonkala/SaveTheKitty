@@ -1,0 +1,21 @@
+
+1 = walls
+
+2 = ball makerA
+
+4 = ball bin B
+
+3 = ball maker B
+
+6 = ball bin B
+
+A = player A 
+
+B = player B 
+
+C = kitty
+
+W = Waterline
+
+S = stopperline
+
