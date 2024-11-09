@@ -3,28 +3,39 @@
 
 void Game::animatePlayers()
 {
- 	if (this->animationClock.getElapsedTime() >= this->animationInterval) {
-        // Toggle Player A's texture
-        if (this->currentPlayerATex == &this->playerATex1) {
-            this->currentPlayerATex = &this->playerATex2;
-        } else {
-            this->currentPlayerATex = &this->playerATex1;
-        }
+	if (this->animationClock.getElapsedTime() >= this->animationInterval) {
+		// Toggle Player A's texture
+		if (this->currentPlayerATex == &this->playerATex1) {
+			this->currentPlayerATex = &this->playerATex2;
+		} else {
+			this->currentPlayerATex = &this->playerATex1;
+		}
 
         // Toggle Player B's texture
-        if (this->currentPlayerBTex == &this->playerBTex1) {
-            this->currentPlayerBTex = &this->playerBTex2;
+		if (this->currentPlayerBTex == &this->playerBTex1) {
+			this->currentPlayerBTex = &this->playerBTex2;
+		} else {
+			this->currentPlayerBTex = &this->playerBTex1;
+		}
+
+		//toggle cat tex
+		if (this->currentCatTex == &this->catTex1) {
+            this->currentCatTex = &this->catTex2;
         } else {
-            this->currentPlayerBTex = &this->playerBTex1;
+            this->currentCatTex = &this->catTex1;
         }
 
         // Apply the new textures to each sprite in the player vectors
-        for (auto& sprite : this->playerA) {
-            sprite.setTexture(*this->currentPlayerATex);
-        }
-        for (auto& sprite : this->playerB) {
-            sprite.setTexture(*this->currentPlayerBTex);
-        }
+		for (auto& sprite : this->playerA) {
+			sprite.setTexture(*this->currentPlayerATex);
+		}
+		for (auto& sprite : this->playerB) {
+			sprite.setTexture(*this->currentPlayerBTex);
+		}
+		for (auto& sprite : this->kitty) {
+			sprite.setTexture(*this->currentCatTex);
+		}
+
 
         // Reset the animation clock
         this->animationClock.restart();
@@ -47,13 +58,21 @@ void Game::renderPB()
 	}
 }
 
+void Game::renderCat()
+{
+	for (auto &e : this->kitty)
+	{
+		this->win->draw(e);
+	}
+}
+
 void Game::initPlayers(Map& map) {
     // Load Player A textures
     if (!this->playerATex1.loadFromFile("images/PA1.png")) {
-        std::cout << "Error: Could not find PlayerA texture PA1!" << std::endl;
-    }
-    if (!this->playerATex2.loadFromFile("images/PA2.png")) {
-        std::cout << "Error: Could not find PlayerA texture PA2!" << std::endl;
+		std::cout << "Error: Could not find PlayerA texture PA1!" << std::endl;
+	}
+	if (!this->playerATex2.loadFromFile("images/PA2.png")) {
+		std::cout << "Error: Could not find PlayerA texture PA2!" << std::endl;
     }
     
     // Load Player B textures
@@ -62,6 +81,12 @@ void Game::initPlayers(Map& map) {
     }
     if (!this->playerBTex2.loadFromFile("images/PB2.png")) {
         std::cout << "Error: Could not find PlayerB texture PB2!" << std::endl;
+    }
+	if (!this->catTex1.loadFromFile("images/cat1.png")) {
+		std::cout << "Error: Could not find cat texture 1!" << std::endl;
+	}
+	if (!this->catTex2.loadFromFile("images/cat2.png")) {
+		std::cout << "Error: Could not find cat texture 2!" << std::endl;
     }
 
     // Initialize Player A sprites
@@ -77,15 +102,23 @@ void Game::initPlayers(Map& map) {
                 pb.setPosition(x * 32, y * 32);
                 this->playerB.push_back(pb);
             }
-//			if (map.getTile(y, x) == 'C') {
-//                sf::Sprite cat(this->playerBTex1);
-//                pb.setPosition(x * 32, y * 32);
-//                this->playerB.push_back(pb);
-//            }
+
         }
-    }
+	}
+    for (int y = 0; y < map.getMapH(); ++y) {
+        for (int x = 0; x < map.getMapL(); ++x) {
+			if (map.getTile(y, x) == 'C') {
+                sf::Sprite cat(this->catTex1);
+                cat.setPosition(x * 32, y * 32);
+                this->kitty.push_back(cat);
+
+			}
+		
+		}
+	}
 
     // Set initial texture states
     this->currentPlayerATex = &this->playerATex1;
     this->currentPlayerBTex = &this->playerBTex1;
+	this->currentCatTex = &this->catTex1;
 }

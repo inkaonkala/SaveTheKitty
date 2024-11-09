@@ -14,11 +14,11 @@ int main()
 	Map map;
 
 	map.initMap();
-	map.printMap();
+
+	//tester to see the map
+//	map.printMap();
 
 	Game game(map);
-//	Game initWalls(map);
-//
 	//Gameloop AKA Event polling
 	while (game.whilstRunning())
 	{

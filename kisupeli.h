@@ -41,43 +41,49 @@ class Game
 {
 private:
 
+	// window 
+
 	sf::RenderWindow	*win;
 	sf::Event			ev;
 	sf::VideoMode		videoMode;
 	Map& map;
 
-	//Game logic 
+	// muuttujat 
 
-//	sf:;idontknow		keys;
-
+	float				playerSpeed = 5.0f;
 	float				timer;
-
-	// game objects
-
-	sf::Texture					wallTex;
-	std::vector<sf::Sprite>		walls; //this should not be sprite
-	sf::Sprite					wall;
-
-	std::vector<sf::Texture> 	catTexture;
-	std::vector<sf::Sprite> 	cats;
-	sf::Sprite cat;
-
-	//sf::Texture				 	playerATex;
-	std::vector<sf::Sprite> 	playerA;
-	sf::Sprite 					pa;
-
-//	sf::Texture					playerBTex;
-	std::vector<sf::Sprite>		playerB;
-	sf::Sprite 					pb;
-
-	sf::Texture 				playerATex1, playerATex2;
-	sf::Texture 				playerBTex1, playerBTex2;
-	sf::Texture* 				currentPlayerATex;
-	sf::Texture* 				currentPlayerBTex;
 
 	sf::Clock animationClock;
 	sf::Time animationInterval = sf::seconds(0.5f); // Change every 0.5 seconds
 	
+	// movement
+
+	float	gravityForce = 6.0f;
+	float	jumpForce = 40.0f;
+	bool	canJumpA = true;
+	bool	canJumpB = true;
+
+	// game objects
+
+	sf::Texture					wallTex;
+	std::vector<sf::Sprite>		walls;
+	sf::Sprite					wall;
+
+	sf::Texture					catTex1, catTex2;
+	std::vector<sf::Sprite> 	kitty;
+	sf::Sprite 					cat;
+
+	sf::Texture 				playerATex1, playerATex2;
+	std::vector<sf::Sprite> 	playerA;
+	sf::Sprite 					pa;
+
+	sf::Texture 				playerBTex1, playerBTex2;
+	std::vector<sf::Sprite>		playerB;
+	sf::Sprite 					pb;
+
+	sf::Texture* 				currentPlayerATex;
+	sf::Texture* 				currentPlayerBTex;
+	sf::Texture*				currentCatTex;
 
 	void	initVar();
 	void	initWin();
@@ -98,16 +104,18 @@ public:
 	void	pollEvents();
 	void	renderWalls();
 
-
 	void	animatePlayers();
+	void	movement(Map& map);
 
-	void	spawnPlayerA();
-	void	updatePA();
+//	void	spawnPlayerA();
+//	void	updatePA();
 	void	renderPA();
 
-	void	spawnPlayerB();
-	void	updatePB();
+//	void	spawnPlayerB();
+//	void	updatePB();
 	void	renderPB();
+
+	void	renderCat();
 
 	void	updateGame();
 	void	renderGame();

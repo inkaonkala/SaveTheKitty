@@ -62,6 +62,7 @@ void Game::updateGame()
 	this->pollEvents();
 	//update all objects
 	this->animatePlayers();
+	this->movement(map);
 }
 
 void Game::renderGame()
@@ -72,6 +73,7 @@ void Game::renderGame()
 
 	this->renderPA();
 	this->renderPB();
+	this->renderCat();
 
 	this->win->display();
 }
