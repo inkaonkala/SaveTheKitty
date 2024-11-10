@@ -25,7 +25,7 @@ Game::Game(Map& map) : map(map)
 	this->initWin();
 	this->initWalls(map);
 	this->initPlayers(map);
-	//this->initCat();
+	this->initBalls(map); //:D it shouldn't be this funny :D
 }
 
 Game::~Game()
@@ -60,20 +60,25 @@ void Game::pollEvents()
 void Game::updateGame()
 {
 	this->pollEvents();
-	//update all objects
+	//update all the mocing stuff
+
 	this->animatePlayers();
 	this->movement(map);
+	this->gameMechanics(map);
 }
 
 void Game::renderGame()
 {
 	this->win->clear(sf::Color(173, 216, 230));
 	this->renderWalls();
-	// clear old, draw new stuff
+
+	// render all the moving stuff
 
 	this->renderPA();
 	this->renderPB();
 	this->renderCat();
+	this->renderBallA();
+	this->renderBallB();
 
 	this->win->display();
 }

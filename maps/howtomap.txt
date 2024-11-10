@@ -18,4 +18,3 @@ C = kitty
 W = Waterline
 
 S = stopperline
-

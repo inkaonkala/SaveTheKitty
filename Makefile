@@ -8,7 +8,7 @@ LDFLAGS = -L$(LIB_DIR) -lsfml-graphics -lsfml-window -lsfml-system
 
 TARGET = saveKitty
 
-SRCS = main.cpp game.cpp kisu.cpp map.cpp players.cpp movement.cpp
+SRCS = main.cpp game.cpp kisu.cpp map.cpp players.cpp movement.cpp whyinamedthemballs.cpp gamemecanics.cpp
 
 all: $(TARGET)
 

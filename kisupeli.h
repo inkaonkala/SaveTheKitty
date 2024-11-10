@@ -24,12 +24,16 @@ private:
 	//map markers
 	int	map_len;
 	int	map_hi;
+
 public:
 	// map marker share
 	int getMapH() const { return map_hi; }
 	int getMapL() const { return map_len; }
 
 	char getTile(int y, int x) const { return mapBase[y][x]; }
+
+	// game point calculator
+	int Gcounter;
 
 	//functions
 	void	initMap();
@@ -50,6 +54,8 @@ private:
 
 	// muuttujat 
 
+	bool	carrying = false;
+
 	float	playerSpeed = 4.0f;
 	float	timer;
 
@@ -64,6 +70,8 @@ private:
 	bool	canJumpB = true;
 
 	// game objects
+
+	//static objects
 
 	sf::Texture					wallTex;
 	std::vector<sf::Sprite>		walls;
@@ -93,13 +101,27 @@ private:
 	std::vector<sf::Sprite> 	kitty;
 	sf::Sprite 					cat;
 
+	// players and balls
+
 	sf::Texture 				playerATex1, playerATex2;
 	std::vector<sf::Sprite> 	playerA;
 	sf::Sprite 					pa;
+	sf::Vector2i				playerAPos;
 
 	sf::Texture 				playerBTex1, playerBTex2;
 	std::vector<sf::Sprite>		playerB;
 	sf::Sprite 					pb;
+	sf::Vector2i				playerBPos;
+
+	sf::Texture					ballATex;
+	std::vector<sf::Sprite>		ballA;
+	sf::Sprite					carriedBallA;
+	sf::Sprite					baA;
+
+	sf::Texture					ballBTex;
+	std::vector<sf::Sprite>		ballB;
+	sf::Sprite					carriedBallB;
+	sf::Sprite					baB;
 
 	sf::Texture* 				currentPlayerATex;
 	sf::Texture* 				currentPlayerBTex;
@@ -111,6 +133,7 @@ private:
 	void	initWin();
 	void	initWalls(Map& map);
 	void	initPlayers(Map& map);
+	void	initBalls(Map& map); //kjeh kjeh :D
 
 public:
 
@@ -136,8 +159,11 @@ public:
 //	void	spawnPlayerB();
 //	void	updatePB();
 	void	renderPB();
-
 	void	renderCat();
+	void	renderBallA();
+	void	renderBallB();
+
+	void	gameMechanics(Map& map);
 
 	void	updateGame();
 	void	renderGame();

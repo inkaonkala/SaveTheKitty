@@ -4,6 +4,7 @@ void	Map::initMap()
 {
 	this->map_hi = 0;
 	this->map_len = 0;
+	this->Gcounter = 0;
 	std::ifstream file("maps/map.txt");
 	if(!file)
 	{
@@ -16,6 +17,8 @@ void	Map::initMap()
 		std::vector<char> row;
 		for (char c : line)
 		{
+			if (c == 'G')
+				this->Gcounter++;
 			if (c != ' ')
 			row.push_back(c);
 		}
